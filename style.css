@@ -1,0 +1,79 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: skyblue;
+  width: 100vw;
+  height: 100vh;
+}
+
+.wrapper {
+  max-width: 300px;
+  width: 100%;
+  height: auto;
+  display: flex;
+  align-items: center;
+  position: relative;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 16px;
+  box-shadow: 1px 1px 1px 0 rgba(255, 255, 255, 0.5), 8px 8px 16px 0 rgba(0, 0, 0, 0.3), -8px -8px 16px 0 rgba(255, 255, 255, 0.3);
+  overflow-x: hidden;
+}
+.wrapper .image-container {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .image-container .carousel {
+  height: 100%;
+  width: 100%;
+  transition: all 0.3s ease;
+  display: flex;
+}
+.wrapper .image-container .carousel img {
+  height: 300px;
+  width: 300px;
+}
+.wrapper .page-btn-group {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  list-style: none;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 8px;
+}
+.wrapper .page-btn-group .page-btn {
+  width: 8px;
+  height: 8px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 50%;
+  margin: 6px;
+}
+.wrapper .btn {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.wrapper .btn i {
+  background: rgba(0, 0, 0, 0.05);
+  padding: 20px 8px;
+  color: rgb(0, 136, 255);
+  cursor: pointer;
+}
+.wrapper .btn i:hover {
+  background: rgba(0, 0, 0, 0.15);
+}
+.wrapper .btn i:active {
+  background: rgba(0, 0, 0, 0.3);
+  color: rgb(0, 76, 143);
+}/*# sourceMappingURL=style.css.map */
