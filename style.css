@@ -58,6 +58,13 @@ body {
   margin: 6px;
   cursor: pointer;
 }
+.wrapper .page-btn-group .page-btn:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+.wrapper .page-btn-group .page-btn:active,
+.wrapper .page-btn-group .page-btn :focus {
+  background: rgb(0, 136, 255);
+}
 .wrapper .page-btn-group .page-btn-active {
   background: rgb(0, 136, 255);
 }

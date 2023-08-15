@@ -5,10 +5,23 @@ const rightArrow = document.querySelector(".next-btn");
 const image = document.querySelectorAll("img");
 const pageButtons = document.querySelectorAll(".page-btn");
 
-let imageIndex = 0,
-  intervalId;
+let imageIndex = 0;
+const intervalId = 0;
 
-const indicators = () => {
+const changeImagePage = () => {
+  carousel.style.transform = `translate(-${imageIndex * 100}%)`;
+};
+
+const slideImage = () => {
+  if (imageIndex === image.length) {
+    imageIndex = 0;
+  } else {
+    imageIndex;
+  }
+  changeImagePage();
+};
+
+const slideDots = () => {
   for (let i = 0; i < image.length; i++) {
     pageButtons[i].className = pageButtons[i].className.replace(
       " page-btn-active",
@@ -19,49 +32,54 @@ const indicators = () => {
     pageButtons[imageIndex].className + " page-btn-active";
 };
 
-const slideImage = () => {
-  if (imageIndex === image.length) {
-    imageIndex = 0;
-  } else {
-    imageIndex;
-  }
-  carousel.style.transform = `translate(-${imageIndex * 100}%)`;
-  indicators();
-};
+const INTERVAL_MILLISECONDS = 2000;
 
 const autoSlide = () => {
   intervalId = setInterval(() => {
     imageIndex++;
     slideImage();
-  }, 1000);
+    slideDots();
+  }, INTERVAL_MILLISECONDS);
 };
 
-const changeImage = (changePage) => {
-  imageIndex += changePage;
-  if (imageIndex < 0) {
-    imageIndex = image.length - 1;
+const pauseAutoSlide = () => {
+  clearInterval(intervalId);
+};
+
+const firstPageIndex = 0;
+const lastPageIndex = image.length - 1;
+
+const increaseImageIndex = () => {
+  if (imageIndex === lastPageIndex) {
+    imageIndex = firstPageIndex;
   } else {
-    imageIndex;
+    imageIndex++;
   }
-  if (imageIndex === image.length) {
-    imageIndex = 0;
+  slideImage();
+  slideDots();
+};
+
+const decreaseImageIndex = () => {
+  if (imageIndex === firstPageIndex) {
+    imageIndex = lastPageIndex;
   } else {
-    imageIndex;
+    imageIndex--;
   }
-  carousel.style.transform = `translate(-${imageIndex * 100}%)`;
-  indicators();
+  slideImage();
+  slideDots();
 };
 
 pageButtons.forEach((pageBtn, pageIndex) => {
   pageBtn.addEventListener("click", () => {
     imageIndex = pageIndex;
-    indicators();
     slideImage();
+    slideDots();
   });
 });
 
 autoSlide();
-rightArrow.addEventListener("click", () => changeImage(1));
-leftArrow.addEventListener("click", () => changeImage(-1));
-wrapper.addEventListener("mouseover", () => clearInterval(intervalId));
-wrapper.addEventListener("mouseleave", autoSlide);
+wrapper.addEventListener("mouseover", () => pauseAutoSlide());
+wrapper.addEventListener("mouseleave", () => autoSlide());
+rightArrow.addEventListener("click", () => increaseImageIndex());
+leftArrow.addEventListener("click", () => decreaseImageIndex());
+//leftArrow.addEventListener("click", decreaseImageIndex); 跟上面有什麼不一樣
