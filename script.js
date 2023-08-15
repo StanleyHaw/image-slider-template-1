@@ -1,9 +1,9 @@
-const wrapper = document.querySelector(".wrapper");
-const carousel = document.querySelector(".carousel");
-const leftArrow = document.querySelector(".prev-btn");
-const rightArrow = document.querySelector(".next-btn");
-const image = document.querySelectorAll("img");
-const pageButtons = document.querySelectorAll(".page-btn");
+const wrapper = document.querySelector('.wrapper');
+const carousel = document.querySelector('.carousel');
+const leftArrow = document.querySelector('.prev-btn');
+const rightArrow = document.querySelector('.next-btn');
+const image = document.querySelectorAll('img');
+const pageButtons = document.querySelectorAll('.page-btn');
 
 let imageIndex = 0;
 const intervalId = 0;
@@ -21,15 +21,17 @@ const slideImage = () => {
   changeImagePage();
 };
 
+console.log('main');
+
 const slideDots = () => {
   for (let i = 0; i < image.length; i++) {
     pageButtons[i].className = pageButtons[i].className.replace(
-      " page-btn-active",
-      ""
+      ' page-btn-active',
+      ''
     );
   }
   pageButtons[imageIndex].className =
-    pageButtons[imageIndex].className + " page-btn-active";
+    pageButtons[imageIndex].className + ' page-btn-active';
 };
 
 const INTERVAL_MILLISECONDS = 2000;
@@ -70,7 +72,7 @@ const decreaseImageIndex = () => {
 };
 
 pageButtons.forEach((pageBtn, pageIndex) => {
-  pageBtn.addEventListener("click", () => {
+  pageBtn.addEventListener('click', () => {
     imageIndex = pageIndex;
     slideImage();
     slideDots();
@@ -78,8 +80,8 @@ pageButtons.forEach((pageBtn, pageIndex) => {
 });
 
 autoSlide();
-wrapper.addEventListener("mouseover", () => pauseAutoSlide());
-wrapper.addEventListener("mouseleave", () => autoSlide());
-rightArrow.addEventListener("click", () => increaseImageIndex());
-leftArrow.addEventListener("click", () => decreaseImageIndex());
+wrapper.addEventListener('mouseover', () => pauseAutoSlide());
+wrapper.addEventListener('mouseleave', () => autoSlide());
+rightArrow.addEventListener('click', () => increaseImageIndex());
+leftArrow.addEventListener('click', () => decreaseImageIndex());
 //leftArrow.addEventListener("click", decreaseImageIndex); 跟上面有什麼不一樣
