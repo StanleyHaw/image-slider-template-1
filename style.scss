@@ -61,6 +61,15 @@ body {
       border-radius: 50%;
       margin: 6px;
       cursor: pointer;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.35);
+      }
+
+      &:active,
+      :focus {
+        background: rgb(0, 136, 255);
+      }
     }
 
     .page-btn-active {
