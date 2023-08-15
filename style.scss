@@ -60,13 +60,16 @@ body {
       background: rgba(0, 0, 0, 0.15);
       border-radius: 50%;
       margin: 6px;
-
-      //   &:hover {
-      //     background: rgba(0, 0, 0, 0.3);
-      //     outline: 1px solid rgba(0, 0, 0, 0.8);
-      //   }
-      //加入javascript hover效果就沒有了
+      cursor: pointer;
     }
+
+    .page-btn-active {
+      background: rgb(0, 136, 255);
+    }
+
+    // .active1 {
+    //   background: red;
+    // }
   }
 
   .btn {

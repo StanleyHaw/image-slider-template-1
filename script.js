@@ -1,62 +1,62 @@
-const wrapper = document.querySelector(".wrapper"),
-  carousel = document.querySelector(".carousel"),
-  image = document.querySelectorAll("img"),
-  leftArrow = document.getElementById("prev-btn"),
-  rightArrow = document.getElementById("next-btn"),
-  pageButtons = document.querySelectorAll(".page-btn");
-const pageButtonArray = Array.from(pageButtons);
+const wrapper = document.querySelector(".wrapper");
+const carousel = document.querySelector(".carousel");
+const leftArrow = document.querySelector(".prev-btn");
+const rightArrow = document.querySelector(".next-btn");
+const image = document.querySelectorAll("img");
+const pageButtons = document.querySelectorAll(".page-btn");
 
 let imageIndex = 0,
   intervalId;
 
-const autoSlide = () => {
-  intervalId = setInterval(() => slideImage(imageIndex++), 3000);
+const indicators = () => {
+  for (let i = 0; i < image.length; i++) {
+    pageButtons[i].className = pageButtons[i].className.replace(
+      " page-btn-active",
+      ""
+    );
+  }
+  pageButtons[imageIndex].className =
+    pageButtons[imageIndex].className + " page-btn-active";
 };
 
 const slideImage = () => {
-  imageIndex =
-    imageIndex === image.length
-      ? 0
-      : imageIndex < 0
-      ? imageIndex - 1
-      : imageIndex;
+  if (imageIndex === image.length) {
+    imageIndex = 0;
+  } else {
+    imageIndex;
+  }
   carousel.style.transform = `translate(-${imageIndex * 100}%)`;
+  indicators();
+};
+
+const autoSlide = () => {
+  intervalId = setInterval(() => {
+    imageIndex++;
+    slideImage();
+  }, 1000);
 };
 
 const changeImage = (changePage) => {
   imageIndex += changePage;
-  imageIndex =
-    imageIndex < 0
-      ? image.length - 1
-      : imageIndex >= image.length
-      ? 0
-      : imageIndex;
+  if (imageIndex < 0) {
+    imageIndex = image.length - 1;
+  } else {
+    imageIndex;
+  }
+  if (imageIndex === image.length) {
+    imageIndex = 0;
+  } else {
+    imageIndex;
+  }
   carousel.style.transform = `translate(-${imageIndex * 100}%)`;
+  indicators();
 };
 
-const changeImageToIndex = (pageIndex) => {
-  imageIndex = pageIndex;
-  carousel.style.transform = `translate(-${imageIndex * 100}%)`;
-
-  pageButtonArray.forEach((pageBtn, pageBtnIndex) => {
-    pageBtn.style.backgroundColor =
-      pageBtnIndex === pageIndex ? "rgb(0, 136, 255)" : "rgba(0, 0, 0, 0.15)";
-  });
-};
-
-pageButtonArray.forEach((pageBtn, pageIndex) => {
-  pageBtn.addEventListener("click", () => changeImageToIndex(pageIndex));
-  pageBtn.addEventListener("mouseover", () => {
-    pageBtn.style.backgroundColor =
-      pageIndex !== imageIndex
-        ? "rgba(0, 0, 0, 0.3)"
-        : pageBtn.style.backgroundColor(pageIndex);
-  });
-  pageBtn.addEventListener("mouseleave", () => {
-    pageBtn.style.backgroundColor =
-      pageIndex !== imageIndex
-        ? "rgba(0, 0, 0, 0.15)"
-        : pageBtn.style.backgroundColor(pageIndex);
+pageButtons.forEach((pageBtn, pageIndex) => {
+  pageBtn.addEventListener("click", () => {
+    imageIndex = pageIndex;
+    indicators();
+    slideImage();
   });
 });
 
